@@ -1,0 +1,78 @@
+﻿<Window x:Class="Cvrle.DodajProizvod"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cvrle"
+        mc:Ignorable="d"
+        Title="Cvrle - Dodavanje proizvoda" Height="373.308" Width="568.916" Icon="cvrle.ico">
+    <Window.Resources>
+        <Style x:Key="ControlStyle" TargetType="Control">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style BasedOn="{StaticResource ControlStyle}" TargetType="Label">
+            <Setter Property="Margin" Value="-4,0,0,0"/>
+        </Style>
+        <Style BasedOn="{StaticResource ControlStyle}" TargetType="TextBox">
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style BasedOn="{StaticResource ControlStyle}" TargetType="Button">
+            <Setter Property="MinWidth" Value="70"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="10,10,10,10"/>
+        </Style>
+        <Style x:Key="SeparatorColumn" TargetType="ColumnDefinition">
+            <Setter Property="Width" Value="10"/>
+        </Style>
+        <Style x:Key="SeparatorRow" TargetType="RowDefinition">
+            <Setter Property="Height" Value="3"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10,10,10,2">
+        <Label x:Name="label_Copy2" Content="Sastojci:" HorizontalAlignment="Stretch" Margin="395,14,63,0" VerticalAlignment="Top" FontSize="14.667"/>
+        <Button x:Name="otkaziBTN" Content="Otkazi" HorizontalAlignment="Left" Margin="169,0,0,12" VerticalAlignment="Bottom" Height="34" Click="otkaziBTN_Click" Width="86"/>
+        <Button x:Name="potvrdiBTN" Content="Potvrdi" HorizontalAlignment="Left" Margin="312,0,0,12" VerticalAlignment="Bottom" Click="potvrdiBTN_Click" Width="86" Height="34"/>
+        <ListBox x:Name="listBox" Margin="0,52,39,0" SelectionMode="Multiple" Grid.IsSharedSizeScope="True" SelectionChanged="proveri_select" HorizontalAlignment="Right" Width="152" Height="191" VerticalAlignment="Top" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Content="{Binding Ime}" IsChecked="{Binding Enable}" FocusManager.FocusedElement="{Binding ElementName=gtb}" Click="CheckBox_Checked" Grid.Column="0" />
+                        <TextBox Name="gtb"  IsEnabled="{Binding Enable}" Grid.Column="1" Text="" KeyDown="Gramaza_Enter" Width="47" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid HorizontalAlignment="Left" Height="203" Margin="7,52,0,0" VerticalAlignment="Top" Width="304">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Style="{StaticResource SeparatorColumn}" Width="0"/>
+                <ColumnDefinition Width="242*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Style="{StaticResource SeparatorRow}"/>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Style="{StaticResource SeparatorRow}"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Style="{StaticResource SeparatorRow}"/>
+                <RowDefinition Height="49*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="label_Copy" Content="Naziv:" HorizontalAlignment="Left" Height="28" Margin="12,12,0,0" VerticalAlignment="Top" Width="51" Grid.Row="2" FontSize="14.667"/>
+            <Label x:Name="label_Copy1" Content="Ukupno:" HorizontalAlignment="Left" Height="28" Margin="5,12,0,0" VerticalAlignment="Top" Width="80" Grid.Row="4" FontSize="14.667" Grid.ColumnSpan="3"/>
+            <TextBox x:Name="imeTB" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="33" Margin="9,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="14.667" Grid.Row="2" GotFocus="clearTB"/>
+            <TextBox x:Name="ukTB" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="33" Margin="9,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="14.667" Grid.Row="4" GotFocus="clearTB" Text="0"/>
+            <Label x:Name="label" Content="g" Grid.Column="2" HorizontalAlignment="Left" Height="35" Margin="154,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="26" FontSize="14.667" RenderTransformOrigin="0.521,1.007"/>
+            <Label x:Name="label_Copy3" Content="Porcija:" HorizontalAlignment="Left" Height="28" Margin="6,12,0,0" VerticalAlignment="Top" Width="73" Grid.Row="6" FontSize="14.667"/>
+            <TextBox x:Name="gramazaTB" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="33" Margin="9,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" FontSize="14.667" Grid.Row="6" GotFocus="clearTB" Text="0" ToolTip="Ne vazi za proizvode koji imaju sastojke"/>
+            <Label x:Name="label_Copy4" Content="g" Grid.Column="2" HorizontalAlignment="Left" Height="35" Margin="154,12,0,0" Grid.Row="6" VerticalAlignment="Top" Width="26" FontSize="14.667" RenderTransformOrigin="0.521,1.007"/>
+        </Grid>
+
+    </Grid>
+</Window>
